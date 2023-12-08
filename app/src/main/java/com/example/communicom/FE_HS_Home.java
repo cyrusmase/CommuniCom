@@ -22,12 +22,14 @@ public class FE_HS_Home extends AppCompatActivity
     String versionN_H, versionF_H, versionR_H, versionM_H;
     private List<String[]> elements;
     public int currentIndex = 0;
+    public String[] currentElement;
 
     TextView pageContentAView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        elements = readFromFile(this, FILE_NAME);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fe_hs_home);
 
@@ -36,7 +38,18 @@ public class FE_HS_Home extends AppCompatActivity
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(this /* MyActivity */, text, duration);
 
-        elements = readFromFile(this, FILE_NAME);
+        if (currentIndex < elements.size()) {
+            // Retrieve the new currentElement based on the updated index
+            currentElement = elements.get(currentIndex);
+
+            // Make sure the array has enough elements to avoid ArrayIndexOutOfBoundsException
+            if (currentElement.length >= 1) {
+                // Update TextViews with information from the new currentElement array
+                pageContentAView.setText("eL1: " + currentElement[0]+
+                        "eL2: " + currentElement[1]+
+                        "eL3: " + currentElement[2]);}
+        } else {currentIndex = 0;}
+
     }
     public void onNewsClickH(View view){
         Intent intentN = new Intent(this, FE_HS_News.class);
@@ -74,12 +87,14 @@ public class FE_HS_Home extends AppCompatActivity
         currentIndex++;
         if (currentIndex < elements.size()) {
             // Retrieve the new currentElement based on the updated index
-            String[] currentElement = elements.get(currentIndex);
+            currentElement = elements.get(currentIndex);
 
             // Make sure the array has enough elements to avoid ArrayIndexOutOfBoundsException
-            if (currentElement.length >= 5) {
+            if (currentElement.length >= 1) {
                 // Update TextViews with information from the new currentElement array
-                pageContentAView.setText("Log Num: " + currentElement[0]);}
+                pageContentAView.setText("eL1: " + currentElement[0]+
+                        "eL2: " + currentElement[1]+
+                        "eL3: " + currentElement[2]);}
         } else {currentIndex = 0;}
 
 
@@ -98,8 +113,7 @@ public class FE_HS_Home extends AppCompatActivity
                     // Update TextViews with information from the new currentElement array
                     pageContentAView.setText("eL1: " + currentElement[0]+
                             "eL2: " + currentElement[1]+
-                            "eL3: " + currentElement[2]);
-                }
+                            "eL3: " + currentElement[2]);}
             } else {
                 currentIndex = 0;
             }
