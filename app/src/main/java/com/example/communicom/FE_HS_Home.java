@@ -1,5 +1,7 @@
 package com.example.communicom;
 
+import static java.lang.String.valueOf;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -23,8 +25,9 @@ public class FE_HS_Home extends AppCompatActivity
     private List<String[]> elements;
     public int currentIndex = 0;
     public String[] currentElement;
-
+    String locationCheck;
     TextView pageContentAView;
+    String nameString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,6 +35,11 @@ public class FE_HS_Home extends AppCompatActivity
         elements = readFromFile(this, FILE_NAME);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fe_hs_home);
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        nameString = bundle.getString("selectionString");
+
 
         pageContentAView = findViewById(R.id.pageContent_HomeA);
         CharSequence text = "Sending message...";
@@ -43,11 +51,18 @@ public class FE_HS_Home extends AppCompatActivity
             currentElement = elements.get(currentIndex);
 
             // Make sure the array has enough elements to avoid ArrayIndexOutOfBoundsException
-            if (currentElement.length >= 1) {
+            if (currentElement.length >= 9) {
+                locationCheck = currentElement[7];
                 // Update TextViews with information from the new currentElement array
-                pageContentAView.setText("eL1: " + currentElement[0]+
-                        "eL2: " + currentElement[1]+
-                        "eL3: " + currentElement[2]);}
+                pageContentAView.setText("eL0: " + currentElement[0]+
+                        " eL1: " + currentElement[1]+
+                        " eL2: " + currentElement[2]+
+                        " eL3: " + currentElement[3]+
+                        " eL4: " + currentElement[4]+
+                        " eL5: " + currentElement[5]+
+                        " eL6: " + currentElement[6]+
+                        " eL7: " + currentElement[7]+
+                        " eL8: " + currentElement[8]+"LC: "+locationCheck);}
         } else {currentIndex = 0;}
 
     }
@@ -90,13 +105,19 @@ public class FE_HS_Home extends AppCompatActivity
             currentElement = elements.get(currentIndex);
 
             // Make sure the array has enough elements to avoid ArrayIndexOutOfBoundsException
-            if (currentElement.length >= 1) {
+            if (currentElement.length >= 9) {
+                locationCheck = currentElement[7];
                 // Update TextViews with information from the new currentElement array
-                pageContentAView.setText("eL1: " + currentElement[0]+
-                        "eL2: " + currentElement[1]+
-                        "eL3: " + currentElement[2]);}
+                pageContentAView.setText("eL0: " + currentElement[0]+
+                        " eL1: " + currentElement[1]+
+                        " eL2: " + currentElement[2]+
+                        " eL3: " + currentElement[3]+
+                        " eL4: " + currentElement[4]+
+                        " eL5: " + currentElement[5]+
+                        " eL6: " + currentElement[6]+
+                        " eL7: " + currentElement[7]+
+                        " eL8: " + currentElement[8]+"LC: "+locationCheck);}
         } else {currentIndex = 0;}
-
 
     }
 
@@ -105,20 +126,22 @@ public class FE_HS_Home extends AppCompatActivity
             currentIndex--;
             String[] currentElement = elements.get(currentIndex);
 
-            if (currentIndex < elements.size()) {
-                // Retrieve the new currentElement based on the updated index
-
-                // Make sure the array has enough elements to avoid ArrayIndexOutOfBoundsException
-                if (currentElement.length >= 3) {
-                    // Update TextViews with information from the new currentElement array
-                    pageContentAView.setText("eL1: " + currentElement[0]+
-                            "eL2: " + currentElement[1]+
-                            "eL3: " + currentElement[2]);}
+            if (currentElement.length >= 9) {
+                locationCheck = currentElement[7];
+                // Update TextViews with information from the new currentElement array
+                pageContentAView.setText("eL0: " + currentElement[0]+
+                        " eL1: " + currentElement[1]+
+                        " eL2: " + currentElement[2]+
+                        " eL3: " + currentElement[3]+
+                        " eL4: " + currentElement[4]+
+                        " eL5: " + currentElement[5]+
+                        " eL6: " + currentElement[6]+
+                        " eL7: " + currentElement[7]+
+                        " eL8: " + currentElement[8]+"LC: "+locationCheck);}
             } else {
                 currentIndex = 0;
             }
         }
-    }
 
     public static List<String[]> readFromFile(Context context, String fileName) {
         List<String[]> elements = new ArrayList<>();
