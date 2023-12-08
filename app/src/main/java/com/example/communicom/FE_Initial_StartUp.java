@@ -17,7 +17,6 @@ public class FE_Initial_StartUp extends AppCompatActivity {
     String selectionString;
     String keyword = "Please?";
     String noChoiceKey = "Area Selection";
-
     CharSequence text;
     int duration;
     Toast toast;
