@@ -123,7 +123,7 @@ public class FE_Form_SubmitNews extends AppCompatActivity {
 
         location = locationSelectionView.getSelectedItem().toString();
         if (location.equals("Please?")){
-            toast.setText("NOT A VALID ANSWER!");
+            toast.setText("PLEASE IS NOT A VALID LOCATION ANSWER!");
             toast.show();
         }else {
             //all outputs working
